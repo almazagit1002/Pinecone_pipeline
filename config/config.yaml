@@ -1,0 +1,17 @@
+aritfacts_root: aritfacts
+
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  local_data_file: Data
+  load_dir: artifacts/data_ingestion/vector_data.csv
+
+data_validation:
+  root_dir: artifacts/data_validation
+  read_data_dir: artifacts/data_ingestion/vector_data.csv
+  STATUS_FILE: artifacts/data_validation/status.txt
+
+data_load:
+  root_dir: artifacts/data_upload
+  read_data_dir: artifacts/data_ingestion/vector_data.csv
+  STATUS_FILE: artifacts/data_upload/status.txt

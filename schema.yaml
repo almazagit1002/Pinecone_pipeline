@@ -1,0 +1,6 @@
+COLUMNS:
+  date_scraped_timestamp: int
+  host: str
+  page_title: str
+  text: str
+  url: str
