@@ -6,9 +6,9 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 __version__ = "0.0.0"
 
-REPO_NAME = "vector_db_pipeline"
+REPO_NAME = "Pinecone_pipeline"
 AUTHOR_USER_NAME = "almazagit1002"
-SRC_REPO = "vector_db_pipeline"
+SRC_REPO = "Pinecone_pipeline"
 AUTHOR_EMAIL = "almazagit1002@gmail.com"
 
 

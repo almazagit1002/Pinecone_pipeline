@@ -1,4 +1,4 @@
-# vector_db_pipeline
+# Pinecone_pipeline
 
 ## Workflows
 
@@ -20,12 +20,12 @@ Installation
 Clone the Repository:
 
 ```bash
-git clone https://github.com/almazagit1002/vector_db_pipeline.git
+git clone https://github.com/almazagit1002/Pinecone_pipeline.git
 ```
 Navigate to the Project Directory:
 
 ```bash
-cd vector_db_pipeline
+cd Pinecone_pipeline
 ```
 ## Set Up Python Virtual Environment (Optional but Recommended):
 
