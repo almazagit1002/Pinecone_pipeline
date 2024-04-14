@@ -19,7 +19,7 @@ Attributes:
 Methods:
     get_text_chunks(text: str) -> List[str]: Splits input text into chunks based on configuration settings.
     split_text(data: List[dict]) -> List[dict]: Splits text data in each dictionary entry into chunks and embeds each chunk.
-    load_data_csv(splited_text_data: List[dict]): Saves the processed data into a CSV file.
+    load_data_json(splited_text_data: List[dict]): Saves the processed data into a JSON file.
 """
 class TextProcessor:
     def __init__(self, config: DataIngestionConfig):
@@ -86,15 +86,15 @@ class TextProcessor:
         logger.info(f"Text processed and chunked. Total chunks: {len(splited_text_data)}")
         return splited_text_data
     
-    def load_data_csv(self, splited_text_data: List[dict]):
+    def load_data_json(self, splited_text_data: List[dict]):
         """
-        Saves the processed data into a CSV file.
+        Saves the processed data into a JSON file.
 
         Args:
             splited_text_data (List[dict]): List of dictionaries containing processed text data.
         """
-        csv_file_path = Path(self.config.load_dir)
+        json_file_path = Path(self.config.load_dir)
         df = pd.DataFrame(splited_text_data)
-        df.to_csv(csv_file_path, index=False)
+        df.to_json(json_file_path, orient='records')
 
-        logger.info(f"Data processed and saved into CSV file in {csv_file_path}")
+        logger.info(f"Data processed and saved into JSON file in {json_file_path}")

@@ -36,6 +36,8 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
         raise e
     
 
+    
+
 
 @ensure_annotations
 def create_directories(path_to_directories: list, verbose=True):
@@ -180,6 +182,29 @@ def list_files_in_directory(path: Path) -> List:
             scraped_files.append(file_path)
     logger.info(f"Files list successfully loaded from: {path}")
     return scraped_files
+
+
+def get_column_types(df) -> dict:
+    """
+    Get the types of values in each column of the DataFrame.
+
+    Args:
+        df (DataFrame): The input DataFrame.
+
+    Returns:
+        dict: A dictionary where keys are column names and values are lists containing the types of values present in each column.
+    """
+
+    column_types = {}
+    for column in df.columns:
+        # Create a set of unique types for values in the column
+        types = set(type(value) for value in df[column])
+        # Convert the set to a list for easier handling
+        types_list = list(types)
+        
+        column_types[column] = types_list
+
+    return column_types
 
 
 
