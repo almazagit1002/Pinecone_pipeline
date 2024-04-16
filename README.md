@@ -67,3 +67,32 @@ The system automates the process of ingesting raw data, validating its integrity
 
 ## Example
 Use data from 'Data' directory
+
+## Docker
+
+### Build Docker Image
+
+Use the following command to build the Docker image for the Pinecone Pipeline:
+```bash
+docker build -t piencone_pipeline_image .
+```
+This command will build the Docker image using the provided Dockerfile (Dockerfile) in the current directory (.). The -t flag is used to tag the image with the name pinecone_pipeline_image for easy reference.
+
+### Run Docker Container
+This command starts a new Docker container named blog_upload from the pinecone_pipeline_image Docker image. The --name flag is used to specify a custom name for the container. The container will execute the command specified in the Dockerfile (CMD ["python3", "main.py"]), which in this case runs the main.py script of the Pinecone Pipeline.
+
+Once the Docker image is built, you can run a Docker container from it using the following command:
+```bash
+docker run --name blog_upload piencone_pipeline_image
+```
+Feel free to adjust the container name or image tag as needed. Ensure that you have Docker installed and properly configured on your system before running these commands.
+
+## Possible bug
+
+### Updating Methids and Functions
+
+If you add new methods or functions to any of the files, it's possible that the system may not detect these changes. In such cases, it's recommended to erase your virtual environment (venv), recreate it, and reinstall the requirements. This ensures that any new changes are properly reflected in the environment.
+
+### Managing Database IDs
+
+Pinecone does not provide direct visibility into all the IDs stored in the database. This limitation can make it challenging to add new vectors while continuing with the last ID. However, there's a workaround available. You can modify the namespace parameter in the params.yaml file to a different value. This effectively changes the namespace of the vectors, allowing you to add new vectors without conflicting with existing ones.
