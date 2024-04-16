@@ -23,6 +23,7 @@ class DataValidationPipeline:
         data_validation = DataValidation(config=data_validation_config)
         data_validation.validate_all_columns()
         data_validation.validate_unique_index()
+        data_validation.validate_column_types()
 
 
 if __name__ =='__main__':

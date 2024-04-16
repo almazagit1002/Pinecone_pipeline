@@ -52,6 +52,7 @@ if __name__ =='__main__':
     try:
         logger.info(f">>>>>>> stage {STAGE_NAME} started <<<<<<<<<<<<")
         obj = DataUploadPipeline(should_restart_database=True)
+        obj.restart_database()
         obj.main()
         logger.info(f">>>>>>> stage {STAGE_NAME} completed <<<<<<<<<<<<\n\nx===============x")
 

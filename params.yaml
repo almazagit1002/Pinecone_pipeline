@@ -9,6 +9,7 @@ INDEX_INFO:
   DIMENSIONS: 1536
   METRIC: cosine
   ENVIROMENT: gcp-starter
+  NAMESPACE: 'blog'
 
 BATCH_SIZE:
   BATCH_SIZE: 120

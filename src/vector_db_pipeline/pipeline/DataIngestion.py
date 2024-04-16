@@ -20,7 +20,7 @@ class DataIngestionPipeline:
         Parses JSON files to extract data.
         Initializes TextProcessor with data ingestion configuration.
         Splits text data into chunks and embeds them.
-        Saves the processed data into a CSV file.
+        Saves the processed data into a JSON file.
         """
         # Retrieve data ingestion configuration
         config = ConfigurationManager()
@@ -38,8 +38,9 @@ class DataIngestionPipeline:
         # Split text data into chunks and embed them
         splited_text_data = text_processor.split_text(data)
         
-        # Save the processed data into a CSV file
-        text_processor.load_data_csv(splited_text_data)
+        
+        # Save the processed data into a JSON file
+        text_processor.load_data_json(splited_text_data)
 
 
 

@@ -8,6 +8,7 @@ class DataIngestionConfig:
     local_data_file: Path
     load_dir: Path
     text_spliter_config : dict
+    namespace_idx:str
 
     
 @dataclass(frozen=True)

@@ -80,19 +80,18 @@ class DataUpload:
 
     def pinecon_vector(self): 
         """
-        Converts data from CSV to a list of JSON objects.
+        Converts data  to a list of JSON objects.
 
         Returns:
             pinecone_vect (list): List of JSON objects representing each row of the dataframe.
         """
         data_read_path = self.config.read_data_dir
-        df = pd.read_csv(data_read_path)
+        df = pd.read_json(data_read_path, orient='records')
         pinecone_vect = []
         
         for i, row in df.iterrows():
             id = row['id']
-            values = row['values'][1:-1].split(',')
-            vector_floats = [float(element) for element in values]  #FIX THIS #############################################################
+            vectors = row['values']
             text = row['text']
             host = row['host']
             page_title = row['page_title']
@@ -100,7 +99,7 @@ class DataUpload:
             # Create a dictionary for the metadata containing 'text', 'host', 'page_title', and 'url'
             metadata = {'text': text, 'host': host, 'page_title': page_title, 'url': url}
             # Create a dictionary for the JSON object containing 'id', 'values', and 'metadata'
-            emb_vect = {'id': id, 'values': vector_floats, 'metadata': metadata}
+            emb_vect = {'id': id, 'values': vectors, 'metadata': metadata}
             
             pinecone_vect.append(emb_vect)
         logger.info(f"Data ready for upload")
@@ -118,7 +117,7 @@ class DataUpload:
         """
         # Determine the batch size and total number of data points
         batch_size = self.config.batch_size.BATCH_SIZE 
-        
+        namespace = self.index_info.NAMESPACE
         index = self.pc.Index(self.index_name)
         data_size = len(pinecone_vector)
         
@@ -138,7 +137,7 @@ class DataUpload:
                 batch_vectors = pinecone_vector[start_idx:end_idx]
                 
                 # Upload the vectors to the Pinecone index
-                index.upsert(vectors=batch_vectors)
+                index.upsert(vectors=batch_vectors,namespace=namespace)
                 logger.info(f"Batch {i+1} uploaded")
             except Exception as e:
                 logger.info(f"Error encountered: {e}")

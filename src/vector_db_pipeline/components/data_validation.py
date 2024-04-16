@@ -69,7 +69,7 @@ class DataValidation:
             logger.error(f"Error occurred during unique index validation: {str(e)}")
             raise e
         
-    def get_column_types(self):
+    def validate_column_types(self):
         """
         Get the types of values in each column of the DataFrame.
 

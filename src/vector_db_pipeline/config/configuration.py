@@ -45,6 +45,7 @@ class ConfigurationManager:
         """
         config = self.config.data_ingestion
         text_spliter = self.params.TEXT_SPLITER
+        namespace = self.params.INDEX_INFO.NAMESPACE
 
         create_directories([config.root_dir])
 
@@ -52,7 +53,8 @@ class ConfigurationManager:
             root_dir=config.root_dir,
             local_data_file=config.local_data_file,
             load_dir=config.load_dir,
-            text_spliter_config=text_spliter
+            text_spliter_config=text_spliter,
+            namespace_idx = namespace
         )
 
         return data_ingestion_config
