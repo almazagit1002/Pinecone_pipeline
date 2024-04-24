@@ -53,4 +53,3 @@
     |__ structure.txt
     |__ Summary.txt
     |__ template.py
-    |__ temp_req.txt

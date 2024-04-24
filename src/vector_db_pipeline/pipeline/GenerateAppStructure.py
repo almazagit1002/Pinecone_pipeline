@@ -1,5 +1,5 @@
 from vector_db_pipeline.config.configuration import ConfigurationManager
-from vector_db_pipeline.components.data_ingestion import CodeStructure
+from vector_db_pipeline.components.generate_app_structure import CodeStructure
 from vector_db_pipeline import logger
 from pathlib import Path
 
