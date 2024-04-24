@@ -161,4 +161,5 @@ cython_debug/
 
 artifacts/*
 logs/*
-research/logs
+research/logs/*
+src/vector_db_pipeline/pipeline/logs/*

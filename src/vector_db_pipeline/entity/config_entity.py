@@ -25,3 +25,14 @@ class DataUploadConfig:
     STATUS_FILE: str
     index_info: dict
     batch_size: int
+
+@dataclass(frozen=True)
+class CodeStructureConfig:
+    root_dir: Path
+    load_struct_dir: Path
+    load_ignored_dir: Path
+    gitignore_path: Path
+    code_dir: Path
+    sructure_file: Path
+    models: dict
+    structure_prompt: str

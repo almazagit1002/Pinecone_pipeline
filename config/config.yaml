@@ -15,3 +15,13 @@ data_load:
   root_dir: artifacts/data_upload
   read_data_dir: artifacts/data_ingestion/vector_data.json
   STATUS_FILE: artifacts/data_upload/status.txt
+
+code_structure:
+  root_dir: artifacts/app_schema
+  load_struct_dir: artifacts/app_schema/structure.json
+  load_ignored_dir: artifacts/app_schema/ignored.json
+  gitignore_path: .gitignore
+  code_dir: .
+  sructure_file: structure.txt
+
+

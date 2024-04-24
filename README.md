@@ -12,6 +12,11 @@
 8. Update the main.py
 9. Update the app.py
 
+## Generate requiremnets
+
+```bash
+pip freeze > requirements.txt
+```
 ## Prerequisites
 Before running the FastAPI API and client examples, make sure you have the following installed:
 
@@ -39,6 +44,7 @@ create an .env file and add the following api keys:
 
 * OPENAI_API_KEY=..... 
 * PINECONE_API_KEY=....
+* GROQ_API_KEY=....
 
 
 Alternatively go to enviroment variables in your loca machine click in create new and insert your API keys. 
@@ -89,10 +95,11 @@ Feel free to adjust the container name or image tag as needed. Ensure that you h
 
 ## Possible bug
 
-### Updating Methids and Functions
+### Updating Methods and Functions
 
 If you add new methods or functions to any of the files, it's possible that the system may not detect these changes. In such cases, it's recommended to erase your virtual environment (venv), recreate it, and reinstall the requirements. This ensures that any new changes are properly reflected in the environment.
 
 ### Managing Database IDs
 
 Pinecone does not provide direct visibility into all the IDs stored in the database. This limitation can make it challenging to add new vectors while continuing with the last ID. However, there's a workaround available. You can modify the namespace parameter in the params.yaml file to a different value. This effectively changes the namespace of the vectors, allowing you to add new vectors without conflicting with existing ones.
+

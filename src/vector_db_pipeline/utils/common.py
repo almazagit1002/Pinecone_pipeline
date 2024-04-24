@@ -205,6 +205,13 @@ def get_column_types(df) -> dict:
         column_types[column] = types_list
 
     return column_types
+@ensure_annotations
+def set_to_txt(file_path: Path,set_obj:set):
+    with open(file_path, "w") as file:
+        # Convert the set elements to strings and write them to the file
+        for element in set_obj:
+            file.write(str(element) + "\n")
+
 
 
 

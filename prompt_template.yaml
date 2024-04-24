@@ -1,0 +1,35 @@
+generate_file_structure:
+  description: |
+    Given a JSON file representing a directory structure, generate a text representation of the directory structure.
+    
+    The JSON file has the following structure:
+     ```
+    JSON_FILE:
+
+    {JSON_FILE}
+    ```
+
+    Where `JSON_FILE` contains the directory structure data in JSON format, specifying the directories, subdirectories, and files.
+
+    The text representation should follow this format:
+
+    ```
+    |__ directory1/
+        |__ subdirectory1/
+            |__ file1
+            |__ file2
+        |__ subdirectory2/
+            |__ file3
+    |__ directory2/
+        |__ file4
+        |__ file5
+    ```
+
+    Each directory and subdirectory should be represented by "|__", and files should be listed underneath their respective directories.
+
+    Ensure that the generated text representation accurately reflects the directory structure specified in the JSON file.
+
+    Ensure you include the "Files" in the root directory.
+
+    RETURN ONLY THE TEXT REPRESENTATION, NO SCRIPTS, NO COMMENTS, NO EXPLANATIONS.
+
