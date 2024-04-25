@@ -72,8 +72,8 @@ The system automates the process of ingesting raw data, validating its integrity
     * Implementation: The DataUploadPipeline class handles data upload tasks by generating Pinecone vectors from processed data and uploading them to the Pinecone index in batches. It also provides an option to restart the database if needed.
 
 * Getting App File Structure Stage:
-    * Use Case: This stage involves generating the file structure of the application using language models such as LLM's (like llama3-70b-8192 or mixtral-8x7b-32768), while monitoring token usage, error rates, costs, latency, and other metrics using Langsmith.
-    * Implementation: To achieve this, the GenerateAppStructurePipeline class is utilized. This class efficiently generates the file structure of the application in a human-friendly and easily readable format. The output of is saved in the structure.txt file.
+    * Use Case: This stage involves generating the file structure of the application using language models (like llama3-70b-8192 or mixtral-8x7b-32768), while monitoring token usage, error rates, costs, latency, and other metrics using Langsmith.
+    * Implementation: To achieve this, the GenerateAppStructurePipeline class is utilized. This class efficiently generates the file structure of the application in a human-friendly and easily readable format. The output is saved in the structure.txt file.
 
 ## Example
 Use data from 'Data' directory

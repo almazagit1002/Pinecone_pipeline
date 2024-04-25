@@ -24,4 +24,10 @@ code_structure:
   code_dir: .
   sructure_file: structure.txt
 
+graph_structure:
+  root_dir: artifacts/graph_structure
+  graph_structure_file: artifacts/graph_structure/graph_model
+  graph_json_model: artifacts/graph_structure/graph_json_model.json
+  sructure_file: structure.txt
+
 

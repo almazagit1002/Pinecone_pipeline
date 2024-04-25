@@ -213,5 +213,8 @@ def set_to_txt(file_path: Path,set_obj:set):
             file.write(str(element) + "\n")
 
 
-
-
+@ensure_annotations
+def read_txt(file_path: Path):
+    with open(file_path, 'r') as file:
+              content = file.read()
+    return content
