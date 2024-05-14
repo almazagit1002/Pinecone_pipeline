@@ -1,0 +1,8 @@
+IGNORE_FILES: !!set
+  .git: null
+  .github: null
+  Data: null
+  README.md: null 
+  LICENSE: null
+  research: null
+  requirements.txt: null

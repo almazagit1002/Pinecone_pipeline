@@ -18,11 +18,16 @@ data_load:
 
 code_structure:
   root_dir: artifacts/app_schema
-  load_struct_dir: artifacts/app_schema/structure.json
-  load_ignored_dir: artifacts/app_schema/ignored.json
+  load_struct_dir: artifacts/app_schema/schema.json
+  load_ignored_dir: artifacts/app_schema/ignored_files.json
   gitignore_path: .gitignore
   code_dir: .
   sructure_file: structure.txt
+
+json_summary:
+  root_dir: artifacts/json_summary
+  read_schema: artifacts/app_schema/schema.json
+  load_json_summary: artifacts/json_summary/json_summary.json
 
 graph_structure:
   root_dir: artifacts/graph_structure

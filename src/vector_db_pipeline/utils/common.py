@@ -218,3 +218,12 @@ def read_txt(file_path: Path):
     with open(file_path, 'r') as file:
               content = file.read()
     return content
+@ensure_annotations
+def remove_extension(file_name: Path):
+    base_name, extension = os.path.splitext(file_name)
+    return base_name
+
+@ensure_annotations
+def write_to_txt(file_path: Path, content):
+    with open(file_path, 'w') as f:
+        f.write(content)
