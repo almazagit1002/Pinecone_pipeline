@@ -1,16 +1,8 @@
-|__ .
+|__ ./
+    |__ .vscode/
+        |__ settings.json
     |__ config/
         |__ config.yaml
-    |__ Data/
-        |__ data_productplan_blog.json
-        |__ data_romanpichler_blog.json
-        |__ data_svpg_blog.json
-    |__ research/
-        |__ 01_data_ingestion.ipynb
-        |__ 02_data_validation.ipynb
-        |__ 03_data_load.ipynb
-        |__ 04_generate_app_schema.ipynb
-        |__ trials.ipynb
     |__ src/
         |__ vector_db_pipeline/
             |__ components/
@@ -38,18 +30,15 @@
                 |__ __init__.py
             |__ __init__.py
     |__ .gitignore
+    |__ data.yaml
     |__ Dockerfile
     |__ exhalation.py
-    |__ knowledge_graph.txt
-    |__ LICENSE
+    |__ exhalation_ignore.yaml
     |__ main.py
     |__ models.yaml
     |__ params.yaml
     |__ prompt_template.yaml
-    |__ README.md
-    |__ requirements.txt
     |__ schema.yaml
     |__ setup.py
     |__ structure.txt
-    |__ Summary.txt
     |__ template.py

@@ -5,10 +5,3 @@ COLUMNS:
   text: str
   url: str
 
-METADATA_KEYS:
-  - SUMMARY
-  - CLASSES
-  - METHODS
-  - FUNCTIONS
-  - LIBRARIES
-  - DEPENDENCIES
