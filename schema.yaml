@@ -4,3 +4,11 @@ COLUMNS:
   page_title: str
   text: str
   url: str
+
+METADATA_KEYS:
+  - SUMMARY
+  - CLASSES
+  - METHODS
+  - FUNCTIONS
+  - LIBRARIES
+  - DEPENDENCIES

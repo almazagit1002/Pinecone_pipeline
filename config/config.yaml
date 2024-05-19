@@ -35,4 +35,8 @@ graph_structure:
   graph_json_model: artifacts/graph_structure/graph_json_model.json
   sructure_file: structure.txt
 
+edited_json_summary:
+  read_json_summary: artifacts/json_summary/json_summary.json
+  load_edited_summary: artifacts/json_summary/json_summary_edited.json
+
 
