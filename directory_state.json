@@ -1,0 +1,12 @@
+{
+    "01_data_ingestion.ipynb": "6daba01c0a67b9062e8aaa3f292ed375",
+    "02_data_validation.ipynb": "022629e00f9ce66e221ebd755bf45574",
+    "03_data_load.ipynb": "1e325c4e005ed8c603ca98358b8148e9",
+    "04_generate_app_schema.ipynb": "5cf0da49307f9251083e21dcb51939f1",
+    "05_generate_metadata.ipynb": "a4a495392ea2e12621042ff0c5ffbd8f",
+    "06_clean_metadata.ipynb": "20bbe0277b8519da279f92ef9e2564bd",
+    "07_changes_in _files.ipynb": "7f2984f7d2ab4624e841fa0a4ba4a35f",
+    "08_graph_structure.ipynb": "c42ec08daa9c454ecdb5e75906348461",
+    "trials.ipynb": "cb994b6966342aab3607fd0dbdb4defc",
+    "logs\\running_logs.log": "314603ba52bf42bdf2a2cecbe5c6c39c"
+}

@@ -211,6 +211,7 @@ def set_to_txt(file_path: Path,set_obj:set):
         # Convert the set elements to strings and write them to the file
         for element in set_obj:
             file.write(str(element) + "\n")
+    logger.info(f"Files successfully saved in: {file_path}")
 
 
 @ensure_annotations

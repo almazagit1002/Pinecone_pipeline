@@ -19,10 +19,11 @@ data_load:
 code_structure:
   root_dir: artifacts/app_schema
   load_struct_dir: artifacts/app_schema/schema.json
-  load_ignored_dir: artifacts/app_schema/ignored_files.json
+  load_ignored_dir: artifacts/app_schema/ignored_files.txt
   gitignore_path: .gitignore
   code_dir: .
   sructure_file: structure.txt
+  save_files_to_read: artifacts/app_schema/files_to_read.txt
 
 json_summary:
   root_dir: artifacts/json_summary
@@ -38,5 +39,11 @@ graph_structure:
 edited_json_summary:
   read_json_summary: artifacts/json_summary/json_summary.json
   load_edited_summary: artifacts/json_summary/json_summary_edited.json
+
+file_changes:
+  dir_to_monitor: .
+  state_root: artifacts/state
+  state_file: artifacts/state/directory_state.json
+  updated_files: artifacts/state/changed_files.json
 
 
