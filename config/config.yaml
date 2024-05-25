@@ -27,7 +27,7 @@ code_structure:
 
 json_summary:
   root_dir: artifacts/json_summary
-  read_schema: artifacts/app_schema/files_to_read.txt
+  read_schema: artifacts/app_schema/files_to_read.json
   load_json_summary: artifacts/json_summary/json_summary.json
 
 graph_structure:

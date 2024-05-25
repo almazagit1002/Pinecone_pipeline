@@ -275,3 +275,25 @@ def list_files(directory, exclusions):
             if not should_exclude(file_path, exclusions):
                 result.append(file_path)
     return result
+
+@ensure_annotations
+def read_file_with_encodings(file_path: Path):
+    """
+    Tries to read a file with different encodings until successful.
+
+    Args:
+        file_path (Path): The path to the file to be read.
+
+    Returns:
+        str: The content of the file if read successfully, otherwise an empty string.
+    """
+    encodings = ['utf-8', 'latin-1', 'iso-8859-1', 'windows-1252']
+    for encoding in encodings:
+        try:
+            with open(file_path, 'r', encoding=encoding) as f:
+                content = f.read()
+            logger.info(f"File content successfully read using encoding: {encoding}")
+            return content
+        except UnicodeDecodeError:
+            logger.warning(f"Failed to read file with encoding: {encoding}")
+    return ""
