@@ -19,15 +19,15 @@ data_load:
 code_structure:
   root_dir: artifacts/app_schema
   load_struct_dir: artifacts/app_schema/schema.json
-  load_ignored_dir: artifacts/app_schema/ignored_files.txt
+  load_ignored_dir: artifacts/app_schema/ignored_files.json
   gitignore_path: .gitignore
   code_dir: .
   sructure_file: structure.txt
-  save_files_to_read: artifacts/app_schema/files_to_read.txt
+  save_files_to_read: artifacts/app_schema/files_to_read.json
 
 json_summary:
   root_dir: artifacts/json_summary
-  read_schema: artifacts/app_schema/schema.json
+  read_schema: artifacts/app_schema/files_to_read.txt
   load_json_summary: artifacts/json_summary/json_summary.json
 
 graph_structure:

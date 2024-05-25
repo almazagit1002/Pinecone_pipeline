@@ -6,3 +6,5 @@ IGNORE_FILES: !!set
   LICENSE: null
   research: null
   requirements.txt: null
+  .vscode\\settings.json: null
+  .gitignore: null

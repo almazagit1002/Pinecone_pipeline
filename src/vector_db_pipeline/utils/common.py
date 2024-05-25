@@ -228,3 +228,50 @@ def remove_extension(file_name: Path):
 def write_to_txt(file_path: Path, content):
     with open(file_path, 'w') as f:
         f.write(content)
+
+@ensure_annotations
+def read_txt_to_list(file_path: Path):
+    file_list = []
+    with open(file_path, 'r') as file:
+        for line in file:
+            file_list.append(Path(line.strip()))
+    return file_list
+
+@ensure_annotations
+def save_set(file_path: Path, file:set):
+    with open(file_path, 'w') as f:
+        json.dump(list(file), f)
+    logger.info(f"Files successfully saved in: {file_path}")
+
+
+@ensure_annotations
+def load_set(file_path: Path):
+    with open(file_path, 'r') as file:
+        _list = json.load(file)
+    
+
+    # Convert the list back to a set
+    loaded_set = set(_list)
+    logger.info(f"Files successfully loaded from: {file_path}")
+    return loaded_set
+                
+
+def list_files(directory, exclusions):
+    def should_exclude(path, exclusions):
+        # Check if the path matches any of the exclusion patterns
+        for exclusion in exclusions:
+            if exclusion in path:
+                return True
+            if path.endswith(exclusion):
+                return True
+        return False
+
+    result = []
+    for root, dirs, files in os.walk(directory):
+        # Exclude directories from the list
+        dirs[:] = [d for d in dirs if not should_exclude(os.path.join(root, d), exclusions)]
+        for file in files:
+            file_path = os.path.join(root, file)
+            if not should_exclude(file_path, exclusions):
+                result.append(file_path)
+    return result
