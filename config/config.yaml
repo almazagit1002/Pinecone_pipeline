@@ -45,5 +45,6 @@ file_changes:
   state_root: artifacts/state
   state_file: artifacts/state/directory_state.json
   updated_files: artifacts/state/changed_files.json
+  monitor_files: artifacts/app_schema/files_to_read.json
 
 

@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
+from typing_extensions import TypedDict
 
 
 @dataclass(frozen=True)
@@ -36,3 +37,31 @@ class CodeStructureConfig:
     sructure_file: Path
     models: dict
     structure_prompt: str
+
+@dataclass(frozen=True)
+class ConfigFileChanges:
+    dir_to_monitor: Path
+    state_file: Path
+    updated_files: Path
+    monitor_files: Path
+
+@dataclass(frozen=True)
+class EditSummaryConfig:
+    read_json_summary: Path
+    load_edited_summary: Path
+
+@dataclass(frozen=True)
+class GraphState(TypedDict):
+    initial_file : str
+    draft_json_summary : dict
+    json_feedback : dict
+    final_json_summary : dict
+    num_steps : int
+
+@dataclass(frozen=True)
+class JsonSummaryConfig:
+    root_dir: Path
+    read_schema:Path
+    load_json_summary: Path
+    prompt_generate_json_summary:dict
+    models: dict

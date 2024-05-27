@@ -3,11 +3,14 @@ from vector_db_pipeline.utils.common import read_yaml, create_directories
 from vector_db_pipeline.entity.config_entity import (DataIngestionConfig,
                                                      DataValidationConfig,
                                                      DataUploadConfig,
-                                                     CodeStructureConfig)
+                                                     CodeStructureConfig,
+                                                     JsonSummaryConfig,
+                                                     EditSummaryConfig,
+                                                     ConfigFileChanges)
 
 
 """
-Manages configuration settings for data ingestion, validation, upload, and code structure.
+Manages configuration settings for data ingestion, validation, upload, code structure, and additional configurations.
 
 Attributes:
     config (dict): Dictionary containing data ingestion, validation, upload, and code structure configuration settings.
@@ -21,6 +24,9 @@ Methods:
     get_data_validation_config(): Retrieves data validation configuration settings.
     get_data_upload_config(): Retrieves data upload configuration settings.
     get_code_structure_config(): Retrieves code structure configuration settings.
+    get_json_summary_config(): Retrieves JSON summary processing configuration settings.
+    get_edit_summary_config(): Retrieves edited JSON summary configuration settings.
+    get_file_changes_config(): Retrieves file changes monitoring configuration settings.
 """
 class ConfigurationManager:
     def __init__( self,
@@ -141,5 +147,68 @@ class ConfigurationManager:
         ) 
 
         return code_structure_config
+    def get_json_summary_config(self) -> JsonSummaryConfig:
+        """
+        Retrieves the configuration settings for JSON summary processing.
+
+        This method reads the configuration settings from the class instance's config attribute,
+        creates necessary directories, and initializes a JsonSummaryConfig object with the 
+        retrieved settings.
+
+        Returns:
+            JsonSummaryConfig: An object containing configuration settings for JSON summary processing.
+        """
+        config = self.config.json_summary
+        create_directories([config.root_dir])
+        
+        json_summary_config = JsonSummaryConfig(
+            root_dir=config.root_dir,
+            read_schema = config.read_schema,
+            load_json_summary = config.load_json_summary,
+            prompt_generate_json_summary = self.prompt_template.generate_json_summary,
+            models = self.models,
+            
+        ) 
+
+        return json_summary_config
 
 
+    def get_edit_summary_config(self) -> EditSummaryConfig:
+        """
+        Create and return an EditSummaryConfig object based on the current configuration.
+
+        This function retrieves the configuration related to the edited JSON summary, 
+        creates an EditSummaryConfig object with the relevant settings, and returns it.
+
+        Returns:
+            EditSummaryConfig: The configuration object for editing the JSON summary.
+        """
+       
+        config = self.config.edited_json_summary
+        edit_summary_config = EditSummaryConfig(
+            read_json_summary=config.read_json_summary,
+            load_edited_summary = config.load_edited_summary
+        
+        ) 
+
+        return edit_summary_config
+    
+    def get_file_changes_config(self) -> ConfigFileChanges:
+        """
+        Retrieves file changes monitoring configuration settings.
+
+        Returns:
+            file_changes_config (ConfigFileChanges): Configuration object for monitoring file changes.
+        """
+        config = self.config.file_changes
+       
+        create_directories([config.state_root])
+
+        file_changes_config = ConfigFileChanges(
+            dir_to_monitor = config.dir_to_monitor,
+            state_file = config.state_file,
+            updated_files = config.updated_files,
+            monitor_files = config.monitor_files
+        )
+
+        return file_changes_config
