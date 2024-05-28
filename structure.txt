@@ -1,30 +1,18 @@
-|__ ./
-    |__ .gitignore
-    |__ data.yaml
-    |__ directory_state.json
-    |__ Dockerfile
-    |__ exhalation.py
-    |__ exhalation_ignore.yaml
-    |__ main.py
-    |__ models.yaml
-    |__ params.yaml
-    |__ prompt_template.yaml
-    |__ schema.yaml
-    |__ setup.py
-    |__ structure.txt
-    |__ template.py
+|__ .
     |__ .vscode/
         |__ settings.json
     |__ config/
         |__ config.yaml
     |__ src/
         |__ vector_db_pipeline/
-            |__ __init__.py
             |__ components/
+                |__ changes_in_files.py
+                |__ clean_metadata.py
                 |__ data_ingestion.py
                 |__ data_load.py
                 |__ data_validation.py
                 |__ generate_app_structure.py
+                |__ generate_metadata.py
                 |__ __init__.py
             |__ config/
                 |__ configuration.py
@@ -38,8 +26,27 @@
                 |__ DataIngestion.py
                 |__ DataUpload.py
                 |__ DataValidation.py
+                |__ EditSummary.py
+                |__ FilesState.py
                 |__ GenerateAppStructure.py
+                |__ JsonSummary.py
                 |__ __init__.py
             |__ utils/
                 |__ common.py
                 |__ __init__.py
+            |__ __init__.py
+    |__ data.yaml
+    |__ directory_state.json
+    |__ Dockerfile
+    |__ exhalation.py
+    |__ exhalation_ignore.yaml
+    |__ main.py
+    |__ models.yaml
+    |__ my_set.json
+    |__ my_set.pkl
+    |__ params.yaml
+    |__ prompt_template.yaml
+    |__ schema.yaml
+    |__ setup.py
+    |__ structure.txt
+    |__ template.py

@@ -312,7 +312,7 @@ class JsonSummary:
             
             for file_path in files_batch:
                 logger.info(f"Starting summary of {file_path}")
-                file_content = read_file_with_encodings(file_path)
+                file_content = read_file_with_encodings(Path(file_path))
 
                 if len(file_content)>0:
                     filename = os.path.basename(file_path)

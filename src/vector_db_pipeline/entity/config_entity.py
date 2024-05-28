@@ -37,6 +37,8 @@ class CodeStructureConfig:
     sructure_file: Path
     models: dict
     structure_prompt: str
+    files_to_ignore: set
+    save_files_to_read: Path
 
 @dataclass(frozen=True)
 class ConfigFileChanges:

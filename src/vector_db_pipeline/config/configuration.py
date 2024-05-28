@@ -34,7 +34,8 @@ class ConfigurationManager:
         schema_filepath = SCHEMA_FILE_PATH,
         params_filepath = PARAMS_FILE_PATH,
         models_filepath = MODELS_FILE_PATH,
-        prompt_template = PROMPT_FILE_PATH):
+        prompt_template = PROMPT_FILE_PATH,
+        files_to_ignore = IGNORE_FILE_PATH):
         """
         Initializes ConfigurationManager with provided filepaths.
 
@@ -50,6 +51,7 @@ class ConfigurationManager:
         self.params = read_yaml(params_filepath)
         self.models = read_yaml(models_filepath)
         self.prompt_template = read_yaml(prompt_template)
+        self.files_to_ignore = read_yaml(files_to_ignore)
 
     def get_data_ingestion_config(self) -> DataIngestionConfig:
         """
@@ -137,13 +139,16 @@ class ConfigurationManager:
         # Create a CodeStructureConfig object with the specified parameters
         code_structure_config = CodeStructureConfig(
             root_dir=config.root_dir,
-            load_struct_dir=config.load_struct_dir,
-            load_ignored_dir=config.load_ignored_dir,
-            gitignore_path=config.gitignore_path,
-            code_dir=config.code_dir,
+            load_struct_dir = config.load_struct_dir,
+            load_ignored_dir = config.load_ignored_dir,
+            gitignore_path = config.gitignore_path,
+            code_dir = config.code_dir,
             sructure_file=config.sructure_file,
-            models=self.models,
-            structure_prompt=prompt_teplate.description
+            save_files_to_read = config.save_files_to_read,
+            models = self.models,
+            structure_prompt = prompt_teplate.description,
+            files_to_ignore = self.files_to_ignore.IGNORE_FILES
+            
         ) 
 
         return code_structure_config

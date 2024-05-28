@@ -1,6 +1,6 @@
 from vector_db_pipeline.entity.config_entity import CodeStructureConfig
 from vector_db_pipeline.constants import *
-from vector_db_pipeline.utils.common import  save_json, set_to_txt
+from vector_db_pipeline.utils.common import  save_json, save_set
 from vector_db_pipeline import logger
 from dotenv import load_dotenv
 from langchain_core.prompts import ChatPromptTemplate
@@ -35,9 +35,9 @@ class CodeStructure:
         """        
         self.config = config        
 
-    def get_ignored_subdirs_from_gitignore(self):
+    def get_ignored_dirs(self):
         """
-        Reads ignored directories and extensions from a .gitignore file.
+        Reads ignored directories and extensions from a .gitignore file and from exhalation_ignnore file.
 
         Returns:
             None
@@ -46,6 +46,7 @@ class CodeStructure:
         ignore_subdirs_files_extentions = []
         gitignore_path = self.config.gitignore_path
         ignored_fles_path = self.config.load_ignored_dir
+        files_to_ignore = self.config.files_to_ignore
         try:
             with open(gitignore_path, "r") as file:
                 for i,line in enumerate(file):
@@ -67,21 +68,26 @@ class CodeStructure:
                             
                             else:
                                 ignore_subdirs_files.append(line)
-            logger.info(f"Ignored files obtained from: {gitignore_path}")
+            logger.info(f"Files to ignore obtained from: {gitignore_path} and exhalation_ignore")
         except FileNotFoundError:
-            return logger.info(f"Warning: {gitignore_path} not found.")
+            return logger.error(f"Warning: {gitignore_path} not found.")
         except Exception as e:
-            return logger.info(f"Error while reading {gitignore_path}: {e}")
+            return logger.error(f"Error while reading {gitignore_path}: {e}")
 
         self.ignored_subdirs = set(ignore_subdirs_files)
-        self.ignored_subdirs.update({'.git', '.github'})
+        #adding files to ignore from exhalation_ignore
+        self.ignored_subdirs.update(files_to_ignore)
         self.ignored_extensions = set(ignore_subdirs_files_extentions)
         try:
             all_ignored_files = self.ignored_subdirs.union(self.ignored_extensions)
-            set_to_txt(self.config.load_ignored_dir,all_ignored_files)
-            return logger.info(f"Files to ignore in code structure loaded to  : {ignored_fles_path}")
+            logger.info(f"Set of files to ignore created")
+            save_set(Path(ignored_fles_path),all_ignored_files)
+
+           
+            return all_ignored_files
+      
         except Exception as e:
-            return logger.info(f"Error while loading ignored files to {ignored_fles_path}: {e}")
+            return logger.error(f"Error while loading ignored files to {ignored_fles_path}: {e}")
         
 
         
@@ -117,16 +123,16 @@ class CodeStructure:
             dict: A dictionary representing the directory structure.
         """
         directory_structure = {}
-        self.root_directory = self.config.code_dir
+        root_directory = self.config.code_dir
         dir_structure_file = self.config.load_struct_dir
         def explore_and_build(directory):
-            dir_path = os.path.join(self.root_directory, directory)
+            dir_path = os.path.join(root_directory, directory)
             directory_structure[directory] = self.explore_directory(dir_path)
             
             for subdir in directory_structure[directory]['Directories']:
                 explore_and_build(os.path.join(directory, subdir))
         
-        explore_and_build(self.root_directory)
+        explore_and_build(root_directory)
         
         
         save_json(Path(dir_structure_file), directory_structure)
@@ -154,7 +160,7 @@ class CodeStructure:
             fromated_structure = chain.invoke({"JSON_FILE": directory_structure})
             with open(formated_structure_file, "w") as f:
                 f.write(fromated_structure.content)
-            return logger.info(f"Formated file structure loaded to : {formated_structure_file}")
+            # return logger.info(f"Formated file structure loaded to : {formated_structure_file}")
         except Exception as e:
-            return logger.info(f"Error while formatting structure: {e}")
+            return logger.error(f"Error while formating structure: {e}")
 
