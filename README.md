@@ -10,7 +10,7 @@
 6. Update the components in src\mlProject\components
 7. Update the pipeline in src\mlProject\pipeline
 8. Update the main.py
-9. Update the app.py
+
 
 ## Generate requiremnets
 

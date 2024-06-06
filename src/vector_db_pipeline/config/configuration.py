@@ -6,7 +6,8 @@ from vector_db_pipeline.entity.config_entity import (DataIngestionConfig,
                                                      CodeStructureConfig,
                                                      JsonSummaryConfig,
                                                      EditSummaryConfig,
-                                                     ConfigFileChanges)
+                                                     ConfigFileChanges,
+                                                     GraphStructureConfig)
 
 
 """
@@ -27,6 +28,7 @@ Methods:
     get_json_summary_config(): Retrieves JSON summary processing configuration settings.
     get_edit_summary_config(): Retrieves edited JSON summary configuration settings.
     get_file_changes_config(): Retrieves file changes monitoring configuration settings.
+     get_graph_structure_config(): Retrieves and constructs the configuration for the graph structure.
 """
 class ConfigurationManager:
     def __init__( self,
@@ -217,3 +219,30 @@ class ConfigurationManager:
         )
 
         return file_changes_config
+    
+    def get_graph_structure_config(self) -> GraphStructureConfig:
+        """
+        Retrieves and constructs the configuration for the graph structure.
+
+        This method initializes the `GraphStructureConfig` object using the current
+        configuration settings, prompt templates, and models. It also ensures that
+        the necessary directories are created.
+
+        Returns:
+            GraphStructureConfig: The configuration object for the graph structure.
+        """
+        config = self.config.graph_structure
+        prompt_teplates = self.prompt_template.generate_graph_structure
+        create_directories([config.root_dir])
+        
+        graph_structure_config = GraphStructureConfig(
+            root_dir=config.root_dir,
+            graph_structure_file = config.graph_structure_file,
+            sructure_file = config.sructure_file,
+            graph_json_model = config.graph_json_model,
+            human_review = config.human_review,
+            models = self.models,
+            graph_prompts = prompt_teplates
+        ) 
+
+        return graph_structure_config

@@ -67,3 +67,22 @@ class JsonSummaryConfig:
     load_json_summary: Path
     prompt_generate_json_summary:dict
     models: dict
+
+@dataclass(frozen=True)
+class GraphStructureConfig:
+    root_dir: Path
+    graph_structure_file: Path
+    sructure_file: Path
+    graph_json_model:Path
+    models: dict
+    graph_prompts: dict
+    human_review: str
+
+class GraphSchemaState(TypedDict):
+   
+    dir_schema : dict
+    draft_graph_schema : dict
+    human_feedback : str
+    agent_feedback : str
+    final_schema : dict
+    num_steps : int
