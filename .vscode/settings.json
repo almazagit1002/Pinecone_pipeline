@@ -1,3 +1,6 @@
 {
-    "CodeGPT.apiKey": "Groq"
+    "CodeGPT.apiKey": "Groq",
+    "jupyter.showCellInputCode": "always",
+    "jupyter.showCellOutput": "always",
+    "jupyter.preserveFocus": false,
 }

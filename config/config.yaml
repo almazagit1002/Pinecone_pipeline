@@ -30,12 +30,6 @@ json_summary:
   read_schema: artifacts/app_schema/files_to_read.json
   load_json_summary: artifacts/json_summary/json_summary.json
 
-graph_structure:
-  root_dir: artifacts/graph_structure
-  graph_structure_file: artifacts/graph_structure/graph_model
-  graph_json_model: artifacts/graph_structure/graph_json_model.json
-  sructure_file: structure.txt
-
 edited_json_summary:
   read_json_summary: artifacts/json_summary/json_summary.json
   load_edited_summary: artifacts/json_summary/json_summary_edited.json
@@ -48,3 +42,9 @@ file_changes:
   monitor_files: artifacts/app_schema/files_to_read.json
 
 
+graph_structure:
+  root_dir: artifacts/graph_structure
+  graph_structure_file: artifacts/graph_structure/graph_model
+  graph_json_model: artifacts/graph_structure/graph_json_model.json
+  sructure_file: artifacts/json_summary/json_summary_edited.json
+  human_review: True

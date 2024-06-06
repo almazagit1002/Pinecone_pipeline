@@ -37,10 +37,10 @@ generate_graph_structure:
     system: |
             You are a data modelling expert capable of creating high quality entity-relationship models from denormalised datasets. 
             You always follow these modeling principles: 
-            You don't overnormalize the model. 
-            You don't use the same name for realtionships connecting different types of entities. 
-            You make sure that all features in the dataset are included in the model. 
-            You make sure there is a one to one mapping between the attributes in the extracted entities and the features in the dataset provided as input. 
+                You don't overnormalize the model. 
+                You don't use the same name for realtionships connecting different types of entities. 
+                You make sure that all features in the dataset are included in the model. 
+                You make sure there is a one to one mapping between the attributes in the extracted entities and the features in the dataset provided as input. 
     task: |
            From the following app file structure below,
             extract a list of entities and relationships with their attributes and map them to the features.
@@ -53,6 +53,8 @@ generate_graph_structure:
 
 
     system_debugger: You are a code tester, and your code has a bug that YOU NEED TO FIX!!!
+
+    
     
     task_debugger: |
         Given the error:
@@ -67,8 +69,80 @@ generate_graph_structure:
         making sure every key value pair is properly matched and there is no open parentheisis.
         Rewrite the json file line by line with the proper indentations.
         RETURN ONLY THE JSON REPRESENTATION, NO SCRIPTS, NO COMMENTS, NO EXPLANATIONS!!!!!!
-
     
+    prompt_graph_schema_generator: |
+        <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+            You are a data modelling expert capable of creating high quality entity-relationship models from denormalised datasets. 
+            You always follow these modeling principles: 
+                You don't overnormalize the model. 
+                You don't use the same name for realtionships connecting different types of entities. 
+                You make sure that all features in the dataset are included in the model. 
+                You make sure there is a one to one mapping between the attributes in the extracted entities and the features in the dataset provided as input. 
+        <|eot_id|><|start_header_id|>user<|end_header_id|>
+            From the following directory schema:
+            DIRECTORY_SCHEMA:
+                
+                {dir_schema}
+
+            Extract a list of entities and relationships with their attributes and map them to the features.
+            The attributes don't need to be named after the features in the dataset, but they should be mapped to the corresponding feature name. 
+            Give meaningful names to relationships rather than just a pair of entities. 
+            In addition to that, for each entity, attribute and relationship, provide the closest schema.org term identified by its uri. 
+            The output format should be as follows:  
+                "{{'entities': [ {{ 'name': 'the entity name', schema_org_term: 'uri of the closest schema.org term for the entity', 'attributes' : [ {{ 'name': 'the att name', schema_org_term: 'uri of the closest schema.org term for the attribute', 'mappedTo' : 'the feature name'}}, ...]}}, 'relationships': [ {{ 'name': 'the entity name', schema_org_term: 'uri of the closest schema.org term for the relationship', 'from': 'source entity', 'to': 'target entity'}}]}}" 
+            RETURN ONLY THE JSON REPRESENTATION, NO SCRIPTS, NO COMMENTS, NO EXPLANATIONS , MAKE SURE TO CLOSE ALL OPEN BRAKETS (TYPES '())','[]' AND '{{}}')!!!.
+            <|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+    prompt_graph_schema_reviewer: |
+        <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+            You are a data modelling expert capable of analysing entity-relationship models and suggest changes that can improve them. 
+            You are not supposed to generate a new model, just provide suggestions for changes when pertinent.
+            You always pay extra attention at the following:
+                Detect under-normalized in the model and recommend they are extracted as new entities connected to the existing ones through relevant relationships.
+                Detect over-normalized entities in the model and recommend they are merged as part of existing ones.
+                Suggest alternative names for terms (property names, entity names, relationship names) used in the model if the proposed ones are not adequate or expressive enough
+                You do not recommend combining or merging attributes into composite ones.
+                You don't always need to propose changes, if a model is good as-is just do not propose changes. 
+        <|eot_id|><|start_header_id|>user<|end_header_id|>
+            Analyse the entity-relationship model and propose some changes in the form of concise instructions. 
+            No more than two or three changes. No preamble or additional comments at the end. 
+            The E-R model comes serialised as JSON including entities with their attributes and relationship connecting entities: 
+            {{'entities': [ {{ 'name': 'the entity name', schema_org_term: 'uri of the closest schema.org term for the entity', 'attributes' : [ {{ 'name': 'the att name', schema_org_term: 'uri of the closest schema.org term for the attribute', 'mappedTo' : 'the feature name'}}, ...]}}, 'relationships': [ {{ 'name': 'the entity name', schema_org_term: 'uri of the closest schema.org term for the relationship', 'from': 'source entity', 'to': 'target entity'}}]}}
+            
+            MODEL:
+            
+                {current_model}
+
+        
+
+            if there is no changes to propose RETURN ONLY "no changes" NO SCRIPTS, NO COMMENTS, NO EXPLANATIONS!!
+            <|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+    prompt_graph_schema_editor: |
+        <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+            You are a data modelling expert capable of modifying entity-relationship models serialised as JSON.
+            You apply some changes and then return the modified entity-relationship model in JSON format
+            The output format should be as follows:  
+                "{{'entities': [ {{ 'name': 'the entity name', schema_org_term: 'uri of the closest schema.org term for the entity', 'attributes' : [ {{ 'name': 'the att name', schema_org_term: 'uri of the closest schema.org term for the attribute', 'mappedTo' : 'the feature name'}}, ...]}}, 'relationships': [ {{ 'name': 'the entity name', schema_org_term: 'uri of the closest schema.org term for the relationship', 'from': 'source entity', 'to': 'target entity'}}]}}" 
+           
+            You apply exclusively the changes you're given and only the changes you're given. No more.
+            RETURN ONLY THE JSON REPRESENTATION, NO SCRIPTS, NO COMMENTS, NO EXPLANATIONS!!!
+
+
+     
+        <|eot_id|><|start_header_id|>user<|end_header_id|>
+            Apply the following changes to the model below:
+                CHANGES:
+                {feedback}
+                No other changes than the ones listed and absolutely no extra text or comments, only JSON as output.
+                MODEL:
+                {current_model}
+
+                
+                
+            <|eot_id|><|start_header_id|>assistant<|end_header_id|>
+    
+
 generate_json_summary:
     
     agent_summary_json_creator: |
